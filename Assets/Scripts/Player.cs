@@ -33,7 +33,7 @@ namespace A
             float vertical = Input.GetAxisRaw("Vertical");
             if (horizontal != 0 || vertical != 0)
             {
-                characterController.Move(speed * Time.deltaTime * (this.transform.right * horizontal + this.transform.forward * vertical).normalized);
+                characterController.Move(speed * Time.deltaTime * (this.transform.right * horizontal + this.transform.forward * vertical));
                 isWalk = true;
             }
 
