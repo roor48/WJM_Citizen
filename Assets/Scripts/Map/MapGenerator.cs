@@ -10,9 +10,9 @@ namespace A
         public readonly Color ColorWall = Color.red;
         public readonly Color ColorCurveWall = Color.green;
         public readonly Color ColorEdgeWall = Color.blue;
-        // ¿˚ µÓ¿Â ¿ßƒ°
-        public Color ColorResponse = new Color(64, 128, 128, 255);
-
+        // Ï†Å Îì±Ïû• ÏúÑÏπò
+        public Color ColorResponse;
+        
         public Transform Terrain;
         public Texture2D MapInfo;
         public float tileSize = 4.0f;
@@ -38,64 +38,61 @@ namespace A
                 for (int j = 0; j < mapWidth; j++)
                 {
                     Color pixelColor = pixels[i * mapWidth + j];
-                    // πŸ¥⁄
+                    // Î∞îÎã•
                     if (pixelColor == ColorFloor)
                     {
                         GameObject floor = Instantiate(Floor, Terrain);
                         floor.transform.position = new Vector3(j * tileSize, 0, i * tileSize);
                     }
-                    // ∫Æ
+                    // Î≤Ω
                     else if (pixelColor == ColorWall)
                     {
                         GameObject wall = Instantiate(Wall, Terrain);
                         wall.transform.position = new Vector3(j * tileSize, 0, i * tileSize);
                         wall.transform.Rotate(new Vector3(0, GetWallRot(pixels, i, j), 0), Space.Self);
                     }
-                    // ƒø∫Í ∫Æ
+                    // Ïª§Î∏å Î≤Ω
                     else if (pixelColor == ColorCurveWall)
                     {
                         GameObject curveWall = Instantiate(CurveWall, Terrain);
                         curveWall.transform.position = new Vector3(j * tileSize, 0, i * tileSize);
                         curveWall.transform.Rotate(new Vector3(0, GetCurveWallRot(pixels, i, j), 0), Space.Self);
                     }
-                    // ∏º≠∏Æ ∫Æ
+                    // Î™®ÏÑúÎ¶¨ Î≤Ω
                     else if (pixelColor == ColorEdgeWall)
                     {
                         GameObject edgeWall = Instantiate(EdgeWall, Terrain);
                         edgeWall.transform.position = new Vector3(j * tileSize, 0, i * tileSize);
                         edgeWall.transform.Rotate(new Vector3(0, GetEdgeRot(pixels, i, j), 0), Space.Self);
                     }
-                    // ∏ÛΩ∫≈Õ ª˝º∫ ¿ßƒ°
-                    
+                    // Î™¨Ïä§ÌÑ∞ ÏÉùÏÑ± ÏúÑÏπò
                     else if (pixelColor == ColorResponse)
                     {
-                        Debug.Log("Enemy");
                         GameObject floor = Instantiate(Floor_Response, Terrain);
                         floor.transform.position = new Vector3(j * tileSize, 0, i * tileSize);
                     }
-                    
                 }
             }
         }
         private float GetWallRot(Color[] pixels, int i, int j)
         {
-            // ø¿∏•¬ 
+            // Ïò§Î•∏Ï™Ω
             float rot = 0f;
-            // æ∆∑°
+            // ÏïÑÎûò
             if (i - 1 >= 0
                 && (pixels[(i - 1) * mapHeight + j] == Color.black
                 || pixels[(i - 1) * mapHeight + j] == Color.cyan))
             {
                 rot = 90f;
             }
-            // øﬁ¬ 
+            // ÏôºÏ™Ω
             else if (j - 1 >= 0
                 && (pixels[i * mapHeight + (j - 1)] == Color.black
                 || pixels[i * mapHeight + (j - 1)] == Color.cyan))
             {
                 rot = 180f;
             }
-            // ¿ß
+            // ÏúÑ
             else if (i + 1 < mapHeight
                 && (pixels[(i + 1) * mapHeight + j] == Color.black
                 || pixels[(i + 1) * mapHeight + j] == Color.cyan))
@@ -108,9 +105,9 @@ namespace A
         
         private float GetCurveWallRot(Color[] pixels, int i, int j)
         {
-            // ø¿∏•¬  ¿ß
+            // Ïò§Î•∏Ï™Ω ÏúÑ
             float rot = 0f;
-            // ø¿∏•¬  æ∆∑°
+            // Ïò§Î•∏Ï™Ω ÏïÑÎûò
             if (((pixels[i * mapHeight + j - 1] == Color.black
                 || pixels[i * mapHeight + j - 1] == Color.cyan))
                 && ((pixels[(i - 1) * mapHeight + j] == Color.black)
@@ -118,7 +115,7 @@ namespace A
             {
                 rot = 180f;
             }
-            // øﬁ¬  ¿ß
+            // ÏôºÏ™Ω ÏúÑ
             else if (((pixels[i * mapHeight + j - 1] == Color.black)
                 || (pixels[i * mapHeight + j - 1] == Color.cyan))
                 && ((pixels[(i + 1) * mapHeight + j] == Color.black)
@@ -126,7 +123,7 @@ namespace A
             {
                 rot = 270f;
             }
-            // øﬁ¬  æ∆∑°
+            // ÏôºÏ™Ω ÏïÑÎûò
             else if (((pixels[i * mapHeight + j + 1] == Color.black)
                 || (pixels[i * mapHeight + j + 1] == Color.cyan))
                 && ((pixels[(i - 1) * mapHeight + j] == Color.black)
@@ -140,23 +137,23 @@ namespace A
 
         private float GetEdgeRot(Color[] pixels, int i, int j)
         {
-            //ø¿∏•¬  ¿ß
+            // Ïò§Î•∏Ï™Ω ÏúÑ
             float rot = 0f;
-            // ø¿∏•¬  æ∆∑°
+            // Ïò§Î•∏Ï™Ω ÏïÑÎûò
             if (i - 1 >= 0 && j + 1 < mapWidth
                 && (pixels[(i - 1) * mapHeight + (j + 1)] == Color.black
                 || pixels[(i - 1) * mapHeight + (j + 1)] == Color.cyan))
             {
                 rot = 90f;
             }
-            // øﬁ¬  ¿ß
+            // ÏôºÏ™Ω ÏúÑ
             else if (i - 1 >= 0 && j - 1 >= 0
                 && (pixels[(i - 1) * mapHeight + (j - 1)] == Color.black
                 || pixels[(i - 1) * mapHeight + (j - 1)] == Color.cyan))
             {
                 rot = 180f;
             }
-            // øﬁ¬  æ∆∑°
+            // ÏôºÏ™Ω ÏïÑÎûò
             else if (i + 1 < mapHeight && j - 1 >= 0
                 && (pixels[(i + 1) * mapHeight + (j - 1)] == Color.black
                 || pixels[(i + 1) * mapHeight + (j - 1)] == Color.cyan))

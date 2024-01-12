@@ -11,12 +11,12 @@ namespace A
             base.OnInspectorGUI();
 
             MapGenerator myGenerator = (MapGenerator)target;
-            if(GUILayout.Button("∏ ¿ª ª˝º∫«’¥œ¥Ÿ. GenMap"))
+            if(GUILayout.Button("Îßµ ÏÉùÏÑ±. GenMap"))
             {
                 myGenerator.BuildGenerator();
             }
 
-            if (GUILayout.Button("∏  ªË¡¶"))
+            if (GUILayout.Button("Îßµ ÏÇ≠Ï†ú. DelMap"))
             {
                 myGenerator.DeleteMap();
             }
