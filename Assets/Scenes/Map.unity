@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -342,6 +342,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1387652876}
   - component: {fileID: 1387652877}
+  - component: {fileID: 1387652878}
   m_Layer: 0
   m_Name: MapGenerator
   m_TagString: Untagged
@@ -385,3 +386,19 @@ MonoBehaviour:
   CurveWall: {fileID: 5926452561735111494, guid: c9b705e4074d97540b9cda62701d379a, type: 3}
   EdgeWall: {fileID: 5098601826910553134, guid: de4de7d16f9c62640a5205d302342aed, type: 3}
   Floor_Response: {fileID: 5947499907670009880, guid: edaca179c6b5e1a4b972631e6dba0d35, type: 3}
+--- !u!114 &1387652878
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1387652875}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a6d9d4608c583ef43a4555b451ade674, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Terrain: {fileID: 131408914}
+  width: 30
+  depth: 30
+  scale: 6

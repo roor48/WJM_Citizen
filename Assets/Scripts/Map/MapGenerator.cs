@@ -6,13 +6,13 @@ namespace A
 {
     public class MapGenerator : MonoBehaviour
     {
-        public readonly Color ColorFloor = Color.white;
-        public readonly Color ColorWall = Color.red;
-        public readonly Color ColorCurveWall = Color.green;
-        public readonly Color ColorEdgeWall = Color.blue;
+        private readonly Color ColorFloor = Color.white;
+        private readonly Color ColorWall = Color.red;
+        private readonly Color ColorCurveWall = Color.green;
+        private readonly Color ColorEdgeWall = Color.blue;
         // 적 등장 위치
         public Color ColorResponse;
-        
+
         public Transform Terrain;
         public Texture2D MapInfo;
         public float tileSize = 4.0f;

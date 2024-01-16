@@ -3,19 +3,19 @@ using UnityEditor;
 
 namespace A
 {
-    [CustomEditor(typeof(MapGenerator))]
-    public class MapGenEditorRandom : Editor
+    [CustomEditor(typeof(Maze))]
+    public class MapRandomGenEditor : Editor
     {
         public override void OnInspectorGUI()
         {
             base.OnInspectorGUI();
 
-            MapGenerator myGenerator = (MapGenerator)target;
-            if(GUILayout.Button("Îßµ ÏÉùÏÑ±. GenMap"))
+            Maze myGenerator = (Maze)target;
+            if (GUILayout.Button("∏  ª˝º∫. GenMap"))
             {
                 myGenerator.BuildGenerator();
             }
-            if (GUILayout.Button("Îßµ ÏÇ≠Ï†ú. DelMap"))
+            if (GUILayout.Button("∏  ªË¡¶. DelMap"))
             {
                 myGenerator.DeleteMap();
             }
