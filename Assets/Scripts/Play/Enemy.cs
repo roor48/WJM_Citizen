@@ -7,6 +7,8 @@ namespace A
 {
     public class Enemy : MonoBehaviour
     {
+        public int damage = 1;
+
         private Animator animator;
         private NavMeshAgent navMeshAgent;
         private Transform playerTrans;
@@ -19,6 +21,7 @@ namespace A
             navMeshAgent.destination = playerTrans.position;
         }
 
+        private readonly int isWalk_Hash = Animator.StringToHash("isWalk");
         private void Update()
         {
             if (!navMeshAgent.isStopped)
@@ -36,14 +39,15 @@ namespace A
                 }
             }
 
-            animator.SetBool("isWalk", !navMeshAgent.isStopped);
+            animator.SetBool(isWalk_Hash, !navMeshAgent.isStopped);
             this.transform.LookAt(playerTrans.position);
         }
 
+        private readonly int isAttack_Hash = Animator.StringToHash("isAttack");
         private IEnumerator Attack()
         {
             yield return new WaitForSeconds(.5f);
-            animator.SetTrigger("isAttack");
+            animator.SetTrigger(isAttack_Hash);
             yield return new WaitForSeconds(.5f);
             if (Vector3.Distance(this.transform.position, playerTrans.position)
                 < navMeshAgent.stoppingDistance)
