@@ -17,14 +17,19 @@ namespace A
 
         private void Update()
         {
-            if (rectTransform.anchoredPosition.y <= storySizeZ)
+            if (rectTransform.anchoredPosition.y < storySizeZ)
             {
                 rectTransform.anchoredPosition += storySpeed * Time.deltaTime * Vector2.up;
             }
             else
             {
-                rectTransform.anchoredPosition = startPos;
+                SetFirstPos();
             }
+        }
+
+        public void SetFirstPos()
+        {
+            rectTransform.anchoredPosition = startPos;
         }
     }
 }

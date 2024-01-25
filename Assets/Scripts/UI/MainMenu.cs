@@ -49,6 +49,7 @@ namespace A
         private void OpenStory()
         {
             storyAnim.SetTrigger("Open");
+            storyAnim.transform.GetChild(1).GetChild(0).GetChild(0).GetComponent<StoryText>().SetFirstPos();
         }
 
         private void OpenSetting()
