@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Runtime.InteropServices;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -69,15 +68,16 @@ namespace A
             //{
             //    navMeshAgent.isStopped = false;
             //}
+
             navMeshAgent.isStopped = false;
         }
 
         public void SetHp(int dmg)
         {
             if (isStop) return;
-            StartCoroutine(HitColor());
 
             hp -= dmg;
+            StartCoroutine(HitColor());
             if (hp <= 0)
             {
                 hp = 0;
