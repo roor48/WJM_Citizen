@@ -14,6 +14,13 @@ namespace A
         public bool isAttackCheck = false;
         public bool isWalk = false;
 
+        public GameObject prefabBullet;
+        public Transform bulletPoint;
+
+        public float bulletDelay = 1.0f;
+        public float bulletTime = 0f;
+        private bool isBullet = false;
+
         private void Start()
         {
             characterController = this.GetComponent<CharacterController>();
@@ -45,10 +52,32 @@ namespace A
         }
         private void Attack()
         {
-            if (Input.GetKeyDown(KeyCode.Mouse0))
+            if (isBullet)
             {
-                animator.SetTrigger(isAttack_Hash);
+                bulletTime += Time.deltaTime;
+                if (bulletTime >= bulletDelay)
+                {
+                    isBullet = false;
+                    bulletTime = 0;
+                }
             }
+            else
+            {
+                if (Input.GetKeyDown(KeyCode.Mouse0))
+                {
+                    isBullet = true;
+                    animator.SetTrigger(isAttack_Hash);
+                    Invoke(nameof(SpawnBullet), 0.2f);
+                }
+            }
+            //if (Input.GetKeyDown(KeyCode.Mouse0))
+            //{
+            //    animator.SetTrigger(isAttack_Hash);
+            //}
+        }
+        private void SpawnBullet()
+        {
+            Instantiate(prefabBullet, bulletPoint.position, this.transform.rotation);
         }
 
         private void Rotation()
@@ -63,7 +92,6 @@ namespace A
                 this.transform.LookAt(new Vector3(mousePoint.x, this.transform.position.y, mousePoint.z));
             }
         }
-
 
         public void SetHp(int damage)
         {

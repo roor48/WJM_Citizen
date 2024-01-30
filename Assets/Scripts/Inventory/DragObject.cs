@@ -5,13 +5,13 @@ using UnityEngine.EventSystems;
 
 namespace A
 {
-    public class DragObject : MonoBehaviour, IPointerDownHandler, IDragHandler, IEndDragHandler, IBeginDragHandler
+    public class DragObject : MonoBehaviour, IPointerDownHandler, IDragHandler, IPointerUpHandler
     {
         public Transform parentTr;
 
         private Vector2 beginPoint;
         private Vector2 moveBegin;
-        private Transform beginParent;
+        public Transform beginParent;
         private CanvasGroup canvasGroup;
 
         private void Awake()
@@ -25,6 +25,11 @@ namespace A
 
         public void OnPointerDown(PointerEventData eventData)
         {
+            if (canvasGroup != null)
+            {
+                canvasGroup.blocksRaycasts = false;
+            }
+
             beginPoint = parentTr.position;
             beginParent = this.transform.parent;
             moveBegin = eventData.position;
@@ -39,8 +44,7 @@ namespace A
         {
             parentTr.position = beginPoint + eventData.position - moveBegin;
         }
-
-        public void OnEndDrag(PointerEventData eventData)
+        public void OnPointerUp(PointerEventData eventData)
         {
             if (canvasGroup != null)
             {
@@ -51,14 +55,6 @@ namespace A
             {
                 this.transform.SetParent(beginParent);
                 this.GetComponent<RectTransform>().anchoredPosition = Vector2.zero;
-            }
-        }
-
-        public void OnBeginDrag(PointerEventData eventData)
-        {
-            if (canvasGroup != null)
-            {
-                canvasGroup.blocksRaycasts = false;
             }
         }
     }

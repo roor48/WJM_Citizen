@@ -416,12 +416,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   slotCntWidth: 4
   slotCntHeight: 4
-  slotWidthSize: 64
-  slotHeightSize: 64
+  slotWidthSize: 200
+  slotHeightSize: 200
   prefabSlot: {fileID: 3298443199945689244, guid: 9333b0455de88a64eb3d4d2cfeb8fda3, type: 3}
   parentObj: {fileID: 1082580799}
   backSprite: {fileID: 0}
-  SlotTopBarSize: 20
+  SlotTopBarSize: 50
   slots: []
   prefabItem: {fileID: 1712287429339461778, guid: 4a6c459e49e67be43bc5afd58d026b14, type: 3}
 --- !u!1 &1654900425
