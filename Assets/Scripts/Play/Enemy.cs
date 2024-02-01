@@ -17,6 +17,9 @@ namespace A
         private Animator animator;
         private NavMeshAgent navMeshAgent;
         private Transform playerTrans;
+        public Collider attackCol;
+
+        public EnemyAttack enemyAttack;
 
         private void Start()
         {
@@ -50,7 +53,7 @@ namespace A
             }
 
             animator.SetBool(isWalk_Hash, !navMeshAgent.isStopped);
-            this.transform.LookAt(playerTrans.position);
+            this.transform.LookAt(playerTrans.position + this.transform.right * -0.3f);
         }
 
         private readonly int isAttack_Hash = Animator.StringToHash("isAttack");
@@ -58,18 +61,22 @@ namespace A
         {
             yield return new WaitForSeconds(.5f);
             animator.SetTrigger(isAttack_Hash);
-            yield return new WaitForSeconds(.5f);
-            //if (Vector3.Distance(this.transform.position, playerTrans.position)
-            //    < navMeshAgent.stoppingDistance)
-            //{
-            //    StartCoroutine(Attack());
-            //}
-            //else
-            //{
-            //    navMeshAgent.isStopped = false;
-            //}
+            enemyAttack.canAttack = true;
+            attackCol.enabled = true;
 
-            navMeshAgent.isStopped = false;
+            yield return new WaitForSeconds(.5f);
+            attackCol.enabled = false;
+            enemyAttack.canAttack = true;
+
+            if (Vector3.Distance(this.transform.position, playerTrans.position)
+                < navMeshAgent.stoppingDistance)
+            {
+                StartCoroutine(Attack());
+            }
+            else
+            {
+                navMeshAgent.isStopped = false;
+            }
         }
 
         public void SetHp(int dmg)

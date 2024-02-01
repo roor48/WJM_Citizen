@@ -29,6 +29,8 @@ namespace A
 
         private void Update()
         {
+            if (!Manager.Instance.isLive) return;
+
             Walk();
             Attack();
             Rotation();
@@ -60,20 +62,15 @@ namespace A
                     isBullet = false;
                     bulletTime = 0;
                 }
+                return;
             }
-            else
+            
+            if (Input.GetKeyDown(KeyCode.Mouse0))
             {
-                if (Input.GetKeyDown(KeyCode.Mouse0))
-                {
-                    isBullet = true;
-                    animator.SetTrigger(isAttack_Hash);
-                    Invoke(nameof(SpawnBullet), 0.2f);
-                }
+                isBullet = true;
+                animator.SetTrigger(isAttack_Hash);
+                Invoke(nameof(SpawnBullet), 0.3f);
             }
-            //if (Input.GetKeyDown(KeyCode.Mouse0))
-            //{
-            //    animator.SetTrigger(isAttack_Hash);
-            //}
         }
         private void SpawnBullet()
         {
@@ -110,7 +107,8 @@ namespace A
 
         private void GameOver()
         {
-
+            Debug.Log("GameOver");
+            Manager.Instance.menu.SetMenu(Menu.MenuStatus.GameOver);
         }
     }
 }
